@@ -39,7 +39,7 @@ public class AppListing extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setupLayout(R.layout.activity_app_listing, "Show Java");
+        setupLayout(R.layout.activity_app_listing, "ShowJava 3");
 
         PackageLoadDialog = new ProgressDialog(this);
         PackageLoadDialog.setIndeterminate(false);

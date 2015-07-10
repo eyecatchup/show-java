@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
         android:layout_centerHorizontal="true"
-        android:text="Show Java"
+        android:text="ShowJava 3"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -27,8 +27,9 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="22dp"
-        android:text="niranjan94@xda"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textStyle="bold"
+        android:text="Stephan Schmitz, eyecatchup@gmail.com"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/textView3"
@@ -36,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:text="by"
+        android:text="Made with ❤ in Cologne, by"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

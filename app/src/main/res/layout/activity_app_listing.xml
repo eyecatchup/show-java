@@ -10,10 +10,9 @@
 	    android:id="@+id/list"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    android:layout_above="@+id/adView"
 	    android:layout_alignParentLeft="true"
         android:layout_below="@+id/toolbar">
 
 	</ListView>
-	<include layout="@layout/adview" android:id="@+id/adView"/>
+	<!--<include layout="@layout/adview" android:id="@+id/adView"/>-->
 </RelativeLayout>

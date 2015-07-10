@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Waiting for App"
+            android:text="Waiting..."
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/grey_400" />
 
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Processing"
+            android:text="Processing..."
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/grey_400" />
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Getting Ready"
+            android:text="Finishing..."
             android:textAllCaps="false"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/grey_400" />

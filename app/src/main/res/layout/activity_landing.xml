@@ -15,8 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/adView">
+        android:layout_centerHorizontal="true">
 
         <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/menu"
@@ -42,7 +41,7 @@
                 android:src="@drawable/ic_action_pick_sdcard"
                 fab:fab_size="normal"
                 android:onClick="OpenFilePicker"
-                fab:fab_label="Pick from sdcard" />
+                fab:fab_label="Pick Apk from SD" />
 
             <com.github.clans.fab.FloatingActionButton
                 android:id="@+id/menu_item1"
@@ -51,10 +50,10 @@
                 android:src="@drawable/ic_action_pick_installed"
                 fab:fab_size="normal"
                 android:onClick="OpenAppListing"
-                fab:fab_label="Pick from Installed" />
+                fab:fab_label="Pick installed App" />
 
         </com.github.clans.fab.FloatingActionMenu>
     </RelativeLayout>
 
-    <include layout="@layout/adview" android:id="@+id/adView"/>
+    <!--<include layout="@layout/adview" android:id="@+id/adView"/>-->
 </RelativeLayout>
