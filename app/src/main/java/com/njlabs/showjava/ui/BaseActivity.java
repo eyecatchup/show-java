@@ -31,13 +31,13 @@ public class BaseActivity extends AppCompatActivity {
     public void setupLayout(int layoutRef){
         setContentView(layoutRef);
         setupToolbar(null);
-        setupGoogleAds();
+        //setupGoogleAds();
     }
 
     public void setupLayout(int layoutRef, String title){
         setContentView(layoutRef);
         setupToolbar(title);
-        setupGoogleAds();
+        //setupGoogleAds();
     }
 
     public void setupLayoutNoActionBar(int layoutRef){
@@ -105,7 +105,7 @@ public class BaseActivity extends AppCompatActivity {
         return status;
     }
 
-    private void setupGoogleAds(){
+    /*private void setupGoogleAds(){
         mAdView = (AdView) findViewById(R.id.adView);
         if(mAdView != null){
             mAdView.setVisibility(View.GONE);
@@ -127,5 +127,5 @@ public class BaseActivity extends AppCompatActivity {
                 mAdView.setVisibility(View.GONE);
             }
         }
-    }
+    }*/
 }

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.njlabs.showjava.R;
 import com.njlabs.showjava.modals.DecompileHistoryItem;
 import com.njlabs.showjava.utils.DatabaseHandler;
+import com.njlabs.showjava.utils.logging.Ln;
 import com.njlabs.showjava.utils.picker.FileChooser;
 
 import org.apache.commons.io.FilenameUtils;
@@ -224,6 +225,7 @@ public class Landing extends BaseActivity {
         if (requestCode == FILEPICKER) {
             if (data != null) {
                 String fileSelected = data.getStringExtra("fileSelected");
+				Ln.d("fileSelected :" + fileSelected);
                 //Toast.makeText(this, fileSelected, Toast.LENGTH_SHORT).show();
                 String PackageDir = fileSelected;
                 String PackageName;
@@ -250,10 +252,14 @@ public class Landing extends BaseActivity {
                     PackageId=FilenameUtils.getName(PackageDir).replaceAll(" ", "_").toLowerCase();
                 }
 
+				Ln.d("package_id :" + PackageId);
+				Ln.d("package_label :" + PackageName);
+				Ln.d("package_file_path :" + PackageDir);
+
                 Intent i = new Intent(getApplicationContext(), AppProcessActivity.class);
                 i.putExtra("package_id",PackageId);
-                i.putExtra("package_name",PackageName);
-                i.putExtra("package_dir",PackageDir);
+                i.putExtra("package_label",PackageName);
+                i.putExtra("package_file_path",PackageDir);
                 startActivity(i);
 
             }

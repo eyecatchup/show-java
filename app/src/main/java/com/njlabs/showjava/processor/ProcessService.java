@@ -95,40 +95,43 @@ public class ProcessService extends IntentService {
 
             packageFilePath = extras.getString("package_file_path");
             Ln.d("package_file_path :"+packageFilePath);
-            try {
+            Ln.d("extras :"+extras);
+            if (packageFilePath != null) {
+                try {
 
-                PackageInfo packageInfo = getPackageManager().getPackageArchiveInfo(packageFilePath, 0);
+                    PackageInfo packageInfo = getPackageManager().getPackageArchiveInfo(packageFilePath, 0);
 
-                apkParser = new ApkParser(new File(packageFilePath));
+                    apkParser = new ApkParser(new File(packageFilePath));
 
-                packageLabel = packageInfo.applicationInfo.loadLabel(getPackageManager()).toString();
-                packageName = packageInfo.packageName;
+                    packageLabel = packageInfo.applicationInfo.loadLabel(getPackageManager()).toString();
+                    packageName = packageInfo.packageName;
 
-                Intent resultIntent = new Intent(getApplicationContext(), AppProcessActivity.class);
-                resultIntent.putExtra("from_notification",true);
-                resultIntent.putExtra("package_name",packageName);
-                resultIntent.putExtra("package_label",packageLabel);
-                resultIntent.putExtra("package_file_path",packageFilePath);
+                    Intent resultIntent = new Intent(getApplicationContext(), AppProcessActivity.class);
+                    resultIntent.putExtra("from_notification", true);
+                    resultIntent.putExtra("package_name", packageName);
+                    resultIntent.putExtra("package_label", packageLabel);
+                    resultIntent.putExtra("package_file_path", packageFilePath);
 
-                PendingIntent resultPendingIntent =
-                        PendingIntent.getActivity( this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                processNotify.updateIntent(resultPendingIntent);
+                    PendingIntent resultPendingIntent =
+                            PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    processNotify.updateIntent(resultPendingIntent);
 
-            } catch (Exception e) {
-                Ln.e(e);
-                broadcastStatus("exit_process_on_error");
+                } catch (Exception e) {
+                    Ln.e(e);
+                    broadcastStatus("exit_process_on_error");
+                }
+
+                sourceOutputDir = Environment.getExternalStorageDirectory() + "/ShowJava" + "/" + packageName;
+                javaSourceOutputDir = sourceOutputDir + "/java";
+
+                Ln.d(sourceOutputDir);
+
+                SourceInfo.initialise(this);
+
+                exceptionHandler = new ExceptionHandler(getApplicationContext(), javaSourceOutputDir, packageName);
+                Thread.setDefaultUncaughtExceptionHandler(exceptionHandler);
+                Processor.extract(this);
             }
-
-            sourceOutputDir = Environment.getExternalStorageDirectory()+"/ShowJava"+"/"+ packageName;
-            javaSourceOutputDir = sourceOutputDir + "/java";
-
-            Ln.d(sourceOutputDir);
-
-            SourceInfo.initialise(this);
-
-            exceptionHandler = new ExceptionHandler(getApplicationContext(), javaSourceOutputDir, packageName);
-            Thread.setDefaultUncaughtExceptionHandler(exceptionHandler);
-            Processor.extract(this);
         }
     }
 
