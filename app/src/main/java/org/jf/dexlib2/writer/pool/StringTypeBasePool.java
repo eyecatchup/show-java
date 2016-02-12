@@ -31,26 +31,30 @@
 
 package org.jf.dexlib2.writer.pool;
 
+import com.google.common.collect.Maps;
+
+import org.jf.dexlib2.writer.DexWriter;
+import org.jf.dexlib2.writer.NullableIndexSection;
+import org.jf.util.ExceptionWithContext;
+
 import java.util.Collection;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.jf.dexlib2.writer.DexWriter;
-import org.jf.dexlib2.writer.NullableIndexSection;
-import org.jf.util.ExceptionWithContext;
-
-import com.google.common.collect.Maps;
-
 public abstract class StringTypeBasePool implements NullableIndexSection<CharSequence> {
-    @Nonnull protected final Map<String, Integer> internedItems = Maps.newHashMap();
+    @Nonnull
+    protected final Map<String, Integer> internedItems = Maps.newHashMap();
 
-    @Nonnull @Override public Collection<Map.Entry<String, Integer>> getItems() {
+    @Nonnull
+    @Override
+    public Collection<Map.Entry<String, Integer>> getItems() {
         return internedItems.entrySet();
     }
 
-    @Override public int getItemIndex(@Nonnull CharSequence key) {
+    @Override
+    public int getItemIndex(@Nonnull CharSequence key) {
         Integer index = internedItems.get(key.toString());
         if (index == null) {
             throw new ExceptionWithContext("Item not found.: %s", key.toString());
@@ -58,7 +62,8 @@ public abstract class StringTypeBasePool implements NullableIndexSection<CharSeq
         return index;
     }
 
-    @Override public int getNullableItemIndex(@Nullable CharSequence key) {
+    @Override
+    public int getNullableItemIndex(@Nullable CharSequence key) {
         if (key == null) {
             return DexWriter.NO_INDEX;
         }

@@ -31,22 +31,26 @@
 
 package org.jf.dexlib2.dexbacked.util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.dexbacked.DexReader;
 import org.jf.dexlib2.dexbacked.value.DexBackedEncodedValue;
 import org.jf.dexlib2.iface.value.EncodedValue;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public abstract class StaticInitialValueIterator {
     public static final StaticInitialValueIterator EMPTY = new StaticInitialValueIterator() {
-        @Nullable @Override public EncodedValue getNextOrNull() { return null; }
-        @Override public void skipNext() {}
-    };
+        @Nullable
+        @Override
+        public EncodedValue getNextOrNull() {
+            return null;
+        }
 
-    @Nullable public abstract EncodedValue getNextOrNull();
-    public abstract void skipNext();
+        @Override
+        public void skipNext() {
+        }
+    };
 
     @Nonnull
     public static StaticInitialValueIterator newOrEmpty(@Nonnull DexBackedDexFile dexFile, int offset) {
@@ -56,8 +60,14 @@ public abstract class StaticInitialValueIterator {
         return new StaticInitialValueIteratorImpl(dexFile, offset);
     }
 
+    @Nullable
+    public abstract EncodedValue getNextOrNull();
+
+    public abstract void skipNext();
+
     private static class StaticInitialValueIteratorImpl extends StaticInitialValueIterator {
-        @Nonnull private final DexReader reader;
+        @Nonnull
+        private final DexReader reader;
         private final int size;
         private int index = 0;
 

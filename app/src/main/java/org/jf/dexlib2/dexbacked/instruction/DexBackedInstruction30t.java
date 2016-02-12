@@ -31,11 +31,11 @@
 
 package org.jf.dexlib2.dexbacked.instruction;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.iface.instruction.formats.Instruction30t;
+
+import javax.annotation.Nonnull;
 
 public class DexBackedInstruction30t extends DexBackedInstruction implements Instruction30t {
     public DexBackedInstruction30t(@Nonnull DexBackedDexFile dexFile,
@@ -44,5 +44,8 @@ public class DexBackedInstruction30t extends DexBackedInstruction implements Ins
         super(dexFile, opcode, instructionStart);
     }
 
-    @Override public int getCodeOffset() { return dexFile.readInt(instructionStart + 2); }
+    @Override
+    public int getCodeOffset() {
+        return dexFile.readInt(instructionStart + 2);
+    }
 }

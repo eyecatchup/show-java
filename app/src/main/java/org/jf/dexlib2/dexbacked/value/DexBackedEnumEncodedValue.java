@@ -31,16 +31,17 @@
 
 package org.jf.dexlib2.dexbacked.value;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.base.value.BaseEnumEncodedValue;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.dexbacked.DexReader;
 import org.jf.dexlib2.dexbacked.reference.DexBackedFieldReference;
 import org.jf.dexlib2.iface.reference.FieldReference;
 
+import javax.annotation.Nonnull;
+
 public class DexBackedEnumEncodedValue extends BaseEnumEncodedValue {
-    @Nonnull public final DexBackedDexFile dexFile;
+    @Nonnull
+    public final DexBackedDexFile dexFile;
     private final int fieldIndex;
 
     public DexBackedEnumEncodedValue(@Nonnull DexReader reader, int valueArg) {
@@ -48,7 +49,9 @@ public class DexBackedEnumEncodedValue extends BaseEnumEncodedValue {
         fieldIndex = reader.readSizedSmallUint(valueArg + 1);
     }
 
-    @Nonnull @Override public FieldReference getValue() {
+    @Nonnull
+    @Override
+    public FieldReference getValue() {
         return new DexBackedFieldReference(dexFile, fieldIndex);
     }
 }

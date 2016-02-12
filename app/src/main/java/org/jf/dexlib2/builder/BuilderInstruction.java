@@ -31,25 +31,28 @@
 
 package org.jf.dexlib2.builder;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.jf.dexlib2.Format;
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.iface.instruction.Instruction;
 import org.jf.dexlib2.util.Preconditions;
 
-public abstract class BuilderInstruction implements Instruction {
-    @Nonnull protected final Opcode opcode;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-    @Nullable MethodLocation location;
+public abstract class BuilderInstruction implements Instruction {
+    @Nonnull
+    protected final Opcode opcode;
+
+    @Nullable
+    MethodLocation location;
 
     protected BuilderInstruction(@Nonnull Opcode opcode) {
         Preconditions.checkFormat(opcode, getFormat());
         this.opcode = opcode;
     }
 
-    @Nonnull public Opcode getOpcode() {
+    @Nonnull
+    public Opcode getOpcode() {
         return opcode;
     }
 

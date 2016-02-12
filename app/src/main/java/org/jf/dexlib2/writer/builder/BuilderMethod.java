@@ -31,22 +31,26 @@
 
 package org.jf.dexlib2.writer.builder;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.jf.dexlib2.base.reference.BaseMethodReference;
 import org.jf.dexlib2.iface.Method;
 import org.jf.dexlib2.iface.MethodImplementation;
 import org.jf.dexlib2.writer.DexWriter;
 
+import java.util.List;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class BuilderMethod extends BaseMethodReference implements Method {
-    @Nonnull final BuilderMethodReference methodReference;
-    @Nonnull final List<? extends BuilderMethodParameter> parameters;
+    @Nonnull
+    final BuilderMethodReference methodReference;
+    @Nonnull
+    final List<? extends BuilderMethodParameter> parameters;
     final int accessFlags;
-    @Nonnull final BuilderAnnotationSet annotations;
-    @Nullable final MethodImplementation methodImplementation;
+    @Nonnull
+    final BuilderAnnotationSet annotations;
+    @Nullable
+    final MethodImplementation methodImplementation;
 
     int annotationSetRefListOffset = DexWriter.NO_OFFSET;
     int codeItemOffset = DexWriter.NO_OFFSET;
@@ -63,12 +67,50 @@ public class BuilderMethod extends BaseMethodReference implements Method {
         this.methodImplementation = methodImplementation;
     }
 
-    @Override @Nonnull public String getDefiningClass() { return methodReference.definingClass.getType(); }
-    @Override @Nonnull public String getName() { return methodReference.name.getString(); }
-    @Override @Nonnull public BuilderTypeList getParameterTypes() { return methodReference.proto.parameterTypes; }
-    @Nonnull @Override public String getReturnType() { return methodReference.proto.returnType.getType(); }
-    @Override @Nonnull public List<? extends BuilderMethodParameter> getParameters() { return parameters; }
-    @Override public int getAccessFlags() { return accessFlags; }
-    @Override @Nonnull public BuilderAnnotationSet getAnnotations() { return annotations; }
-    @Override @Nullable public MethodImplementation getImplementation() { return methodImplementation; }
+    @Override
+    @Nonnull
+    public String getDefiningClass() {
+        return methodReference.definingClass.getType();
+    }
+
+    @Override
+    @Nonnull
+    public String getName() {
+        return methodReference.name.getString();
+    }
+
+    @Override
+    @Nonnull
+    public BuilderTypeList getParameterTypes() {
+        return methodReference.proto.parameterTypes;
+    }
+
+    @Nonnull
+    @Override
+    public String getReturnType() {
+        return methodReference.proto.returnType.getType();
+    }
+
+    @Override
+    @Nonnull
+    public List<? extends BuilderMethodParameter> getParameters() {
+        return parameters;
+    }
+
+    @Override
+    public int getAccessFlags() {
+        return accessFlags;
+    }
+
+    @Override
+    @Nonnull
+    public BuilderAnnotationSet getAnnotations() {
+        return annotations;
+    }
+
+    @Override
+    @Nullable
+    public MethodImplementation getImplementation() {
+        return methodImplementation;
+    }
 }

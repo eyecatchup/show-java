@@ -31,12 +31,12 @@
 
 package org.jf.dexlib2.dexbacked.instruction;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.iface.instruction.formats.Instruction22t;
 import org.jf.util.NibbleUtils;
+
+import javax.annotation.Nonnull;
 
 public class DexBackedInstruction22t extends DexBackedInstruction implements Instruction22t {
     public DexBackedInstruction22t(@Nonnull DexBackedDexFile dexFile,
@@ -55,5 +55,8 @@ public class DexBackedInstruction22t extends DexBackedInstruction implements Ins
         return NibbleUtils.extractHighUnsignedNibble(dexFile.readByte(instructionStart + 1));
     }
 
-    @Override public int getCodeOffset() { return dexFile.readShort(instructionStart + 2); }
+    @Override
+    public int getCodeOffset() {
+        return dexFile.readShort(instructionStart + 2);
+    }
 }

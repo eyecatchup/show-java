@@ -31,30 +31,33 @@
 
 package org.jf.dexlib2.writer.builder;
 
+import com.google.common.collect.ImmutableList;
+
+import org.jf.dexlib2.writer.DexWriter;
+
 import java.util.AbstractList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import org.jf.dexlib2.writer.DexWriter;
-
-import com.google.common.collect.ImmutableList;
-
 public class BuilderTypeList extends AbstractList<BuilderTypeReference> {
     static final BuilderTypeList EMPTY = new BuilderTypeList(ImmutableList.<BuilderTypeReference>of());
 
-    @Nonnull final List<? extends BuilderTypeReference> types;
+    @Nonnull
+    final List<? extends BuilderTypeReference> types;
     int offset = DexWriter.NO_OFFSET;
 
     public BuilderTypeList(@Nonnull List<? extends BuilderTypeReference> types) {
         this.types = types;
     }
 
-    @Override public BuilderTypeReference get(int index) {
+    @Override
+    public BuilderTypeReference get(int index) {
         return types.get(index);
     }
 
-    @Override public int size() {
+    @Override
+    public int size() {
         return types.size();
     }
 

@@ -31,14 +31,15 @@
 
 package org.jf.dexlib2.dexbacked.value;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.base.value.BaseTypeEncodedValue;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.dexbacked.DexReader;
 
+import javax.annotation.Nonnull;
+
 public class DexBackedTypeEncodedValue extends BaseTypeEncodedValue {
-    @Nonnull public final DexBackedDexFile dexFile;
+    @Nonnull
+    public final DexBackedDexFile dexFile;
     private final int typeIndex;
 
     public DexBackedTypeEncodedValue(@Nonnull DexReader reader, int valueArg) {
@@ -46,7 +47,9 @@ public class DexBackedTypeEncodedValue extends BaseTypeEncodedValue {
         typeIndex = reader.readSizedSmallUint(valueArg + 1);
     }
 
-    @Nonnull @Override public String getValue() {
+    @Nonnull
+    @Override
+    public String getValue() {
         return dexFile.getType(typeIndex);
     }
 }

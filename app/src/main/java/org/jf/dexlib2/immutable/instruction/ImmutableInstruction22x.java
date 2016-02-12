@@ -31,12 +31,12 @@
 
 package org.jf.dexlib2.immutable.instruction;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.Format;
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.iface.instruction.formats.Instruction22x;
 import org.jf.dexlib2.util.Preconditions;
+
+import javax.annotation.Nonnull;
 
 public class ImmutableInstruction22x extends ImmutableInstruction implements Instruction22x {
     public static final Format FORMAT = Format.Format22x;
@@ -54,7 +54,7 @@ public class ImmutableInstruction22x extends ImmutableInstruction implements Ins
 
     public static ImmutableInstruction22x of(Instruction22x instruction) {
         if (instruction instanceof ImmutableInstruction22x) {
-            return (ImmutableInstruction22x)instruction;
+            return (ImmutableInstruction22x) instruction;
         }
         return new ImmutableInstruction22x(
                 instruction.getOpcode(),
@@ -62,8 +62,18 @@ public class ImmutableInstruction22x extends ImmutableInstruction implements Ins
                 instruction.getRegisterB());
     }
 
-    @Override public int getRegisterA() { return registerA; }
-    @Override public int getRegisterB() { return registerB; }
+    @Override
+    public int getRegisterA() {
+        return registerA;
+    }
 
-    @Override public Format getFormat() { return FORMAT; }
+    @Override
+    public int getRegisterB() {
+        return registerB;
+    }
+
+    @Override
+    public Format getFormat() {
+        return FORMAT;
+    }
 }

@@ -31,10 +31,8 @@
 
 package org.jf.dexlib2.analysis;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -50,8 +48,10 @@ import org.jf.dexlib2.iface.reference.FieldReference;
 import org.jf.util.ConsoleUtil;
 import org.jf.util.SparseArray;
 
-import com.google.common.base.Splitter;
-import com.google.common.collect.Lists;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class DumpFields {
     private static final Options options;
@@ -79,7 +79,7 @@ public class DumpFields {
         String outFile = "fields.txt";
         int apiLevel = 15;
 
-        for (int i=0; i<parsedOptions.length; i++) {
+        for (int i = 0; i < parsedOptions.length; i++) {
             Option option = parsedOptions[i];
             String opt = option.getOpt();
 
@@ -117,12 +117,12 @@ public class DumpFields {
             ClassPath classPath = ClassPath.fromClassPath(bootClassPathDirs, bootClassPaths, dexFile, apiLevel);
             FileOutputStream outStream = new FileOutputStream(outFile);
 
-            for (ClassDef classDef: dexFile.getClasses()) {
+            for (ClassDef classDef : dexFile.getClasses()) {
                 ClassProto classProto = (ClassProto) classPath.getClass(classDef);
                 SparseArray<FieldReference> fields = classProto.getInstanceFields();
-                String className = "Class "  + classDef.getType() + " : " + fields.size() + " instance fields\n";
+                String className = "Class " + classDef.getType() + " : " + fields.size() + " instance fields\n";
                 outStream.write(className.getBytes());
-                for (int i=0;i<fields.size();i++) {
+                for (int i = 0; i < fields.size(); i++) {
                     String field = fields.keyAt(i) + ":" + fields.valueAt(i).getType() + " " + fields.valueAt(i).getName() + "\n";
                     outStream.write(field.getBytes());
                 }
@@ -163,7 +163,7 @@ public class DumpFields {
 
         Option apiLevelOption = OptionBuilder.withLongOpt("api-level")
                 .withDescription("The numeric api-level of the file being disassembled. If not " +
-                                "specified, it defaults to 15 (ICS).")
+                        "specified, it defaults to 15 (ICS).")
                 .hasArg()
                 .withArgName("API_LEVEL")
                 .create("a");

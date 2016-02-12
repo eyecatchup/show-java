@@ -31,11 +31,11 @@
 
 package org.jf.dexlib2.dexbacked.instruction;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.iface.instruction.formats.UnknownInstruction;
+
+import javax.annotation.Nonnull;
 
 public class DexBackedUnknownInstruction extends DexBackedInstruction implements UnknownInstruction {
     public DexBackedUnknownInstruction(@Nonnull DexBackedDexFile dexFile,
@@ -43,7 +43,8 @@ public class DexBackedUnknownInstruction extends DexBackedInstruction implements
         super(dexFile, Opcode.NOP, instructionStart);
     }
 
-    @Override public int getOriginalOpcode() {
+    @Override
+    public int getOriginalOpcode() {
         int opcode = dexFile.readUbyte(instructionStart);
         if (opcode == 0) {
             opcode = dexFile.readUshort(instructionStart);

@@ -31,17 +31,19 @@
 
 package org.jf.dexlib2.writer.builder;
 
+import org.jf.dexlib2.base.BaseAnnotation;
+import org.jf.dexlib2.writer.DexWriter;
+
 import java.util.Set;
 
 import javax.annotation.Nonnull;
 
-import org.jf.dexlib2.base.BaseAnnotation;
-import org.jf.dexlib2.writer.DexWriter;
-
 class BuilderAnnotation extends BaseAnnotation {
+    @Nonnull
+    final BuilderTypeReference type;
+    @Nonnull
+    final Set<? extends BuilderAnnotationElement> elements;
     int visibility;
-    @Nonnull final BuilderTypeReference type;
-    @Nonnull final Set<? extends BuilderAnnotationElement> elements;
     int offset = DexWriter.NO_OFFSET;
 
     public BuilderAnnotation(int visibility, @Nonnull BuilderTypeReference type,
@@ -51,15 +53,20 @@ class BuilderAnnotation extends BaseAnnotation {
         this.elements = elements;
     }
 
-    @Override public int getVisibility() {
+    @Override
+    public int getVisibility() {
         return visibility;
     }
 
-    @Nonnull @Override public String getType() {
+    @Nonnull
+    @Override
+    public String getType() {
         return type.getType();
     }
 
-    @Nonnull @Override public Set<? extends BuilderAnnotationElement> getElements() {
+    @Nonnull
+    @Override
+    public Set<? extends BuilderAnnotationElement> getElements() {
         return elements;
     }
 }

@@ -31,12 +31,12 @@
 
 package org.jf.dexlib2.immutable.instruction;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.Format;
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.iface.instruction.formats.Instruction21t;
 import org.jf.dexlib2.util.Preconditions;
+
+import javax.annotation.Nonnull;
 
 public class ImmutableInstruction21t extends ImmutableInstruction implements Instruction21t {
     public static final Format FORMAT = Format.Format21t;
@@ -54,7 +54,7 @@ public class ImmutableInstruction21t extends ImmutableInstruction implements Ins
 
     public static ImmutableInstruction21t of(Instruction21t instruction) {
         if (instruction instanceof ImmutableInstruction21t) {
-            return (ImmutableInstruction21t)instruction;
+            return (ImmutableInstruction21t) instruction;
         }
         return new ImmutableInstruction21t(
                 instruction.getOpcode(),
@@ -62,8 +62,18 @@ public class ImmutableInstruction21t extends ImmutableInstruction implements Ins
                 instruction.getCodeOffset());
     }
 
-    @Override public int getRegisterA() { return registerA; }
-    @Override public int getCodeOffset() { return codeOffset; }
+    @Override
+    public int getRegisterA() {
+        return registerA;
+    }
 
-    @Override public Format getFormat() { return FORMAT; }
+    @Override
+    public int getCodeOffset() {
+        return codeOffset;
+    }
+
+    @Override
+    public Format getFormat() {
+        return FORMAT;
+    }
 }

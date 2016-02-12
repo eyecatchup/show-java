@@ -31,12 +31,12 @@
 
 package org.jf.dexlib2.dexbacked.raw;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.dexbacked.raw.util.DexAnnotator;
 import org.jf.dexlib2.util.AnnotatedBytes;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class AnnotationSetItem {
     public static final int SIZE_OFFSET = 0;
@@ -45,7 +45,9 @@ public class AnnotationSetItem {
     @Nonnull
     public static SectionAnnotator makeAnnotator(@Nonnull DexAnnotator annotator, @Nonnull MapItem mapItem) {
         return new SectionAnnotator(annotator, mapItem) {
-            @Nonnull @Override public String getItemName() {
+            @Nonnull
+            @Override
+            public String getItemName() {
                 return "annotation_set_item";
             }
 
@@ -54,13 +56,14 @@ public class AnnotationSetItem {
                 int size = dexFile.readSmallUint(out.getCursor());
                 out.annotate(4, "size = %d", size);
 
-                for (int i=0; i<size; i++) {
+                for (int i = 0; i < size; i++) {
                     int annotationOffset = dexFile.readSmallUint(out.getCursor());
                     out.annotate(4, AnnotationItem.getReferenceAnnotation(dexFile, annotationOffset));
                 }
             }
 
-            @Override public int getItemAlignment() {
+            @Override
+            public int getItemAlignment() {
                 return 4;
             }
         };

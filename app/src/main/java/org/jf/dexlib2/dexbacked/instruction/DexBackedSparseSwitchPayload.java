@@ -31,21 +31,20 @@
 
 package org.jf.dexlib2.dexbacked.instruction;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.dexbacked.util.FixedSizeList;
 import org.jf.dexlib2.iface.instruction.SwitchElement;
 import org.jf.dexlib2.iface.instruction.formats.SparseSwitchPayload;
 
-public class DexBackedSparseSwitchPayload extends DexBackedInstruction implements SparseSwitchPayload {
-    public final int elementCount;
+import java.util.List;
 
+import javax.annotation.Nonnull;
+
+public class DexBackedSparseSwitchPayload extends DexBackedInstruction implements SparseSwitchPayload {
     private static final int ELEMENT_COUNT_OFFSET = 2;
     private static final int KEYS_OFFSET = 4;
+    public final int elementCount;
 
     public DexBackedSparseSwitchPayload(@Nonnull DexBackedDexFile dexFile,
                                         int instructionStart) {
@@ -64,19 +63,25 @@ public class DexBackedSparseSwitchPayload extends DexBackedInstruction implement
                 return new SwitchElement() {
                     @Override
                     public int getKey() {
-                        return dexFile.readInt(instructionStart + KEYS_OFFSET + index*4);
+                        return dexFile.readInt(instructionStart + KEYS_OFFSET + index * 4);
                     }
 
                     @Override
                     public int getOffset() {
-                        return dexFile.readInt(instructionStart + KEYS_OFFSET + elementCount*4 + index*4);
+                        return dexFile.readInt(instructionStart + KEYS_OFFSET + elementCount * 4 + index * 4);
                     }
                 };
             }
 
-            @Override public int size() { return elementCount; }
+            @Override
+            public int size() {
+                return elementCount;
+            }
         };
     }
 
-    @Override public int getCodeUnits() { return 2 + elementCount*4; }
+    @Override
+    public int getCodeUnits() {
+        return 2 + elementCount * 4;
+    }
 }

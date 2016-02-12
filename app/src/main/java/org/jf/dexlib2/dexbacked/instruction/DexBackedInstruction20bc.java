@@ -31,14 +31,14 @@
 
 package org.jf.dexlib2.dexbacked.instruction;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.ReferenceType;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.dexbacked.reference.DexBackedReference;
 import org.jf.dexlib2.iface.instruction.formats.Instruction20bc;
 import org.jf.dexlib2.iface.reference.Reference;
+
+import javax.annotation.Nonnull;
 
 public class DexBackedInstruction20bc extends DexBackedInstruction implements Instruction20bc {
     public DexBackedInstruction20bc(@Nonnull DexBackedDexFile dexFile,
@@ -47,7 +47,10 @@ public class DexBackedInstruction20bc extends DexBackedInstruction implements In
         super(dexFile, opcode, instructionStart);
     }
 
-    @Override public int getVerificationError() { return dexFile.readUbyte(instructionStart + 1) & 0x3f; }
+    @Override
+    public int getVerificationError() {
+        return dexFile.readUbyte(instructionStart + 1) & 0x3f;
+    }
 
     @Nonnull
     @Override
@@ -56,7 +59,8 @@ public class DexBackedInstruction20bc extends DexBackedInstruction implements In
         return DexBackedReference.makeReference(dexFile, referenceType, dexFile.readUshort(instructionStart + 2));
     }
 
-    @Override public int getReferenceType() {
+    @Override
+    public int getReferenceType() {
         int referenceType = (dexFile.readUbyte(instructionStart + 1) >>> 6) + 1;
         ReferenceType.validateReferenceType(referenceType);
         return referenceType;

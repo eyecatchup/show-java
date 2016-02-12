@@ -31,14 +31,15 @@
 
 package org.jf.dexlib2.dexbacked.reference;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.base.reference.BaseFieldReference;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.dexbacked.raw.FieldIdItem;
 
+import javax.annotation.Nonnull;
+
 public class DexBackedFieldReference extends BaseFieldReference {
-    @Nonnull public final DexBackedDexFile dexFile;
+    @Nonnull
+    public final DexBackedDexFile dexFile;
     public final int fieldIdItemOffset;
 
     public DexBackedFieldReference(@Nonnull DexBackedDexFile dexFile, int fieldIndex) {

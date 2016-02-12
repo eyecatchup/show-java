@@ -31,12 +31,12 @@
 
 package org.jf.dexlib2.dexbacked.instruction;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.iface.instruction.formats.Instruction11n;
 import org.jf.util.NibbleUtils;
+
+import javax.annotation.Nonnull;
 
 public class DexBackedInstruction11n extends DexBackedInstruction implements Instruction11n {
     public DexBackedInstruction11n(@Nonnull DexBackedDexFile dexFile,
@@ -55,5 +55,8 @@ public class DexBackedInstruction11n extends DexBackedInstruction implements Ins
         return NibbleUtils.extractHighSignedNibble(dexFile.readByte(instructionStart + 1));
     }
 
-    @Override public long getWideLiteral() { return getNarrowLiteral(); }
+    @Override
+    public long getWideLiteral() {
+        return getNarrowLiteral();
+    }
 }

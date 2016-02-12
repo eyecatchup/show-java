@@ -31,12 +31,12 @@
 
 package org.jf.dexlib2.dexbacked.raw;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.dexbacked.raw.util.DexAnnotator;
 import org.jf.dexlib2.util.AnnotatedBytes;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class MethodIdItem {
     public static final int ITEM_SIZE = 8;
@@ -48,7 +48,9 @@ public class MethodIdItem {
     @Nonnull
     public static SectionAnnotator makeAnnotator(@Nonnull DexAnnotator annotator, @Nonnull MapItem mapItem) {
         return new SectionAnnotator(annotator, mapItem) {
-            @Nonnull @Override public String getItemName() {
+            @Nonnull
+            @Override
+            public String getItemName() {
                 return "method_id_item";
             }
 
@@ -100,7 +102,7 @@ public class MethodIdItem {
 
         int methodCount = mapItem.getItemCount();
         String[] ret = new String[methodCount];
-        for (int i=0; i<methodCount; i++) {
+        for (int i = 0; i < methodCount; i++) {
             ret[i] = asString(dexFile, i);
         }
         return ret;

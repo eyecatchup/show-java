@@ -31,16 +31,17 @@
 
 package org.jf.dexlib2.immutable.debug;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.jf.dexlib2.DebugItemType;
 import org.jf.dexlib2.base.reference.BaseStringReference;
 import org.jf.dexlib2.iface.debug.SetSourceFile;
 import org.jf.dexlib2.iface.reference.StringReference;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class ImmutableSetSourceFile extends ImmutableDebugItem implements SetSourceFile {
-    @Nullable protected final String sourceFile;
+    @Nullable
+    protected final String sourceFile;
 
     public ImmutableSetSourceFile(int codeAddress,
                                   @Nullable String sourceFile) {
@@ -49,25 +50,36 @@ public class ImmutableSetSourceFile extends ImmutableDebugItem implements SetSou
     }
 
     @Nonnull
-    public static ImmutableSetSourceFile of (@Nonnull SetSourceFile setSourceFile) {
+    public static ImmutableSetSourceFile of(@Nonnull SetSourceFile setSourceFile) {
         if (setSourceFile instanceof ImmutableSetSourceFile) {
-            return (ImmutableSetSourceFile)setSourceFile;
+            return (ImmutableSetSourceFile) setSourceFile;
         }
         return new ImmutableSetSourceFile(
                 setSourceFile.getCodeAddress(),
                 setSourceFile.getSourceFile());
     }
 
-    @Nullable @Override public String getSourceFile() { return sourceFile; }
+    @Nullable
+    @Override
+    public String getSourceFile() {
+        return sourceFile;
+    }
 
-    @Nullable @Override public StringReference getSourceFileReference() {
-        return sourceFile==null?null:new BaseStringReference() {
-            @Nonnull @Override public String getString() {
+    @Nullable
+    @Override
+    public StringReference getSourceFileReference() {
+        return sourceFile == null ? null : new BaseStringReference() {
+            @Nonnull
+            @Override
+            public String getString() {
                 return sourceFile;
             }
         };
     }
 
 
-    @Override public int getDebugItemType() { return DebugItemType.SET_SOURCE_FILE; }
+    @Override
+    public int getDebugItemType() {
+        return DebugItemType.SET_SOURCE_FILE;
+    }
 }

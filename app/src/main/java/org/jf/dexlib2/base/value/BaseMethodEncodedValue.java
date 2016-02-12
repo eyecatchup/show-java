@@ -31,14 +31,14 @@
 
 package org.jf.dexlib2.base.value;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import com.google.common.primitives.Ints;
 
 import org.jf.dexlib2.ValueType;
 import org.jf.dexlib2.iface.value.EncodedValue;
 import org.jf.dexlib2.iface.value.MethodEncodedValue;
 
-import com.google.common.primitives.Ints;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public abstract class BaseMethodEncodedValue implements MethodEncodedValue {
     @Override
@@ -49,7 +49,7 @@ public abstract class BaseMethodEncodedValue implements MethodEncodedValue {
     @Override
     public boolean equals(@Nullable Object o) {
         if (o instanceof MethodEncodedValue) {
-            return getValue().equals(((MethodEncodedValue)o).getValue());
+            return getValue().equals(((MethodEncodedValue) o).getValue());
         }
         return false;
     }
@@ -58,8 +58,10 @@ public abstract class BaseMethodEncodedValue implements MethodEncodedValue {
     public int compareTo(@Nonnull EncodedValue o) {
         int res = Ints.compare(getValueType(), o.getValueType());
         if (res != 0) return res;
-        return getValue().compareTo(((MethodEncodedValue)o).getValue());
+        return getValue().compareTo(((MethodEncodedValue) o).getValue());
     }
 
-    public int getValueType() { return ValueType.METHOD; }
+    public int getValueType() {
+        return ValueType.METHOD;
+    }
 }

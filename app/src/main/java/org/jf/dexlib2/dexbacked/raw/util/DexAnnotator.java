@@ -31,14 +31,9 @@
 
 package org.jf.dexlib2.dexbacked.raw.util;
 
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Ordering;
+import com.google.common.primitives.Ints;
 
 import org.jf.dexlib2.dexbacked.raw.AnnotationDirectoryItem;
 import org.jf.dexlib2.dexbacked.raw.AnnotationItem;
@@ -63,18 +58,20 @@ import org.jf.dexlib2.dexbacked.raw.TypeIdItem;
 import org.jf.dexlib2.dexbacked.raw.TypeListItem;
 import org.jf.dexlib2.util.AnnotatedBytes;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.Ordering;
-import com.google.common.primitives.Ints;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class DexAnnotator extends AnnotatedBytes {
-    @Nonnull public final RawDexFile dexFile;
-
-    private final Map<Integer, SectionAnnotator> annotators = Maps.newHashMap();
     private static final Map<Integer, Integer> sectionAnnotationOrder = Maps.newHashMap();
 
     static {
-        int[] sectionOrder = new int[] {
+        int[] sectionOrder = new int[]{
                 ItemType.MAP_LIST,
 
                 ItemType.HEADER_ITEM,
@@ -99,17 +96,21 @@ public class DexAnnotator extends AnnotatedBytes {
                 ItemType.ANNOTATION_DIRECTORY_ITEM
         };
 
-        for (int i=0; i<sectionOrder.length; i++) {
+        for (int i = 0; i < sectionOrder.length; i++) {
             sectionAnnotationOrder.put(sectionOrder[i], i);
         }
     }
+
+    @Nonnull
+    public final RawDexFile dexFile;
+    private final Map<Integer, SectionAnnotator> annotators = Maps.newHashMap();
 
     public DexAnnotator(@Nonnull RawDexFile dexFile, int width) {
         super(width);
 
         this.dexFile = dexFile;
 
-        for (MapItem mapItem: dexFile.getMapItems()) {
+        for (MapItem mapItem : dexFile.getMapItems()) {
             switch (mapItem.getType()) {
                 case ItemType.HEADER_ITEM:
                     annotators.put(mapItem.getType(), HeaderItem.makeAnnotator(this, mapItem));
@@ -175,7 +176,8 @@ public class DexAnnotator extends AnnotatedBytes {
         List<MapItem> mapItems = dexFile.getMapItems();
         // sort the map items based on the order defined by sectionAnnotationOrder
         Ordering<MapItem> ordering = Ordering.from(new Comparator<MapItem>() {
-            @Override public int compare(MapItem o1, MapItem o2) {
+            @Override
+            public int compare(MapItem o1, MapItem o2) {
                 return Ints.compare(sectionAnnotationOrder.get(o1.getType()), sectionAnnotationOrder.get(o2.getType()));
             }
         });
@@ -183,7 +185,7 @@ public class DexAnnotator extends AnnotatedBytes {
         mapItems = ordering.immutableSortedCopy(mapItems);
 
         try {
-            for (MapItem mapItem: mapItems) {
+            for (MapItem mapItem : mapItems) {
                 SectionAnnotator annotator = annotators.get(mapItem.getType());
                 annotator.annotateSection(this);
             }

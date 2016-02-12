@@ -19,6 +19,7 @@ import java.util.Map;
 /**
  * Created by Niranjan on 12-07-2014.
  */
+@SuppressWarnings("unused")
 public final class Strings {
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 
@@ -31,14 +32,10 @@ public final class Strings {
      * sentences such as "Alice, Bob and Charlie" use ", " and " and " as the
      * delimiters.
      *
-     * @param delimiter
-     *            usually ", "
-     * @param lastDelimiter
-     *            usually " and "
-     * @param objs
-     *            the objects
-     * @param <T>
-     *            the type
+     * @param delimiter     usually ", "
+     * @param lastDelimiter usually " and "
+     * @param objs          the objects
+     * @param <T>           the type
      * @return a string
      */
     public static <T> String joinAnd(final String delimiter, final String lastDelimiter, final Collection<T> objs) {
@@ -50,8 +47,8 @@ public final class Strings {
         while (iter.hasNext()) {
             final T obj = iter.next();
             if (notEmpty(obj)) {
-                if( buffer.length() != 0 ) {
-                    buffer.append( iter.hasNext() ? delimiter : lastDelimiter );
+                if (buffer.length() != 0) {
+                    buffer.append(iter.hasNext() ? delimiter : lastDelimiter);
                 }
                 buffer.append(Strings.toString(obj));
             }
@@ -59,6 +56,7 @@ public final class Strings {
         return buffer.toString();
     }
 
+    @SafeVarargs
     public static <T> String joinAnd(final String delimiter, final String lastDelimiter, final T... objs) {
         return joinAnd(delimiter, lastDelimiter, Arrays.asList(objs));
     }
@@ -73,7 +71,7 @@ public final class Strings {
         while (iter.hasNext()) {
             final T obj = iter.next();
             if (notEmpty(obj)) {
-                if( buffer.length() != 0 ) {
+                if (buffer.length() != 0) {
                     buffer.append(delimiter);
                 }
                 buffer.append(Strings.toString(obj));
@@ -82,6 +80,7 @@ public final class Strings {
         return buffer.toString();
     }
 
+    @SafeVarargs
     public static <T> String join(final String delimiter, final T... objects) {
         return join(delimiter, Arrays.asList(objects));
     }
@@ -188,7 +187,7 @@ public final class Strings {
     }
 
     public static String namedFormat(String str, Map<String, String> substitutions) {
-        for (Map.Entry<String,String> entry : substitutions.entrySet())
+        for (Map.Entry<String, String> entry : substitutions.entrySet())
             str = str.replace('$' + entry.getKey(), entry.getValue());
 
         return str;
@@ -198,7 +197,7 @@ public final class Strings {
         if (nameValuePairs.length % 2 != 0)
             throw new InvalidParameterException("You must include one value for each parameter");
 
-        final HashMap<String, String> map = new HashMap<String, String>(nameValuePairs.length / 2);
+        final HashMap<String, String> map = new HashMap<>(nameValuePairs.length / 2);
         for (int i = 0; i < nameValuePairs.length; i += 2)
             map.put(Strings.toString(nameValuePairs[i]), Strings.toString(nameValuePairs[i + 1]));
 

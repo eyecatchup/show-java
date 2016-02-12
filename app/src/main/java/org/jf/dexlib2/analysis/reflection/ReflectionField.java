@@ -31,10 +31,7 @@
 
 package org.jf.dexlib2.analysis.reflection;
 
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import com.google.common.collect.ImmutableSet;
 
 import org.jf.dexlib2.analysis.reflection.util.ReflectionUtils;
 import org.jf.dexlib2.base.reference.BaseFieldReference;
@@ -42,7 +39,10 @@ import org.jf.dexlib2.iface.Annotation;
 import org.jf.dexlib2.iface.Field;
 import org.jf.dexlib2.iface.value.EncodedValue;
 
-import com.google.common.collect.ImmutableSet;
+import java.util.Set;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ReflectionField extends BaseFieldReference implements Field {
     private final java.lang.reflect.Field field;
@@ -51,27 +51,38 @@ public class ReflectionField extends BaseFieldReference implements Field {
         this.field = field;
     }
 
-    @Override public int getAccessFlags() {
+    @Override
+    public int getAccessFlags() {
         return field.getModifiers();
     }
 
-    @Nullable @Override public EncodedValue getInitialValue() {
+    @Nullable
+    @Override
+    public EncodedValue getInitialValue() {
         return null;
     }
 
-    @Nonnull @Override public Set<? extends Annotation> getAnnotations() {
+    @Nonnull
+    @Override
+    public Set<? extends Annotation> getAnnotations() {
         return ImmutableSet.of();
     }
 
-    @Nonnull @Override public String getDefiningClass() {
+    @Nonnull
+    @Override
+    public String getDefiningClass() {
         return ReflectionUtils.javaToDexName(field.getDeclaringClass().getName());
     }
 
-    @Nonnull @Override public String getName() {
+    @Nonnull
+    @Override
+    public String getName() {
         return field.getName();
     }
 
-    @Nonnull @Override public String getType() {
+    @Nonnull
+    @Override
+    public String getType() {
         return ReflectionUtils.javaToDexName(field.getType().getName());
     }
 }

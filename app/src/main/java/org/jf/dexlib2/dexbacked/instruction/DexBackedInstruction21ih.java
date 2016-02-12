@@ -31,11 +31,11 @@
 
 package org.jf.dexlib2.dexbacked.instruction;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.iface.instruction.formats.Instruction21ih;
+
+import javax.annotation.Nonnull;
 
 public class DexBackedInstruction21ih extends DexBackedInstruction implements Instruction21ih {
     public DexBackedInstruction21ih(@Nonnull DexBackedDexFile dexFile,
@@ -44,8 +44,23 @@ public class DexBackedInstruction21ih extends DexBackedInstruction implements In
         super(dexFile, opcode, instructionStart);
     }
 
-    @Override public int getRegisterA() { return dexFile.readUbyte(instructionStart + 1); }
-    @Override public int getNarrowLiteral() { return getHatLiteral() << 16; }
-    @Override public long getWideLiteral() { return getNarrowLiteral(); }
-    @Override public short getHatLiteral() { return (short)dexFile.readShort(instructionStart + 2); }
+    @Override
+    public int getRegisterA() {
+        return dexFile.readUbyte(instructionStart + 1);
+    }
+
+    @Override
+    public int getNarrowLiteral() {
+        return getHatLiteral() << 16;
+    }
+
+    @Override
+    public long getWideLiteral() {
+        return getNarrowLiteral();
+    }
+
+    @Override
+    public short getHatLiteral() {
+        return (short) dexFile.readShort(instructionStart + 2);
+    }
 }

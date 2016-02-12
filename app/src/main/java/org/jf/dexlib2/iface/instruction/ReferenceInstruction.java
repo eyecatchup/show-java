@@ -31,11 +31,13 @@
 
 package org.jf.dexlib2.iface.instruction;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.iface.reference.Reference;
 
+import javax.annotation.Nonnull;
+
 public interface ReferenceInstruction extends Instruction {
-    @Nonnull Reference getReference();
+    @Nonnull
+    Reference getReference();
+
     int getReferenceType();
 }

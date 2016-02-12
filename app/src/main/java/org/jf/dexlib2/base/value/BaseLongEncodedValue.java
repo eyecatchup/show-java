@@ -31,28 +31,28 @@
 
 package org.jf.dexlib2.base.value;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import com.google.common.primitives.Ints;
+import com.google.common.primitives.Longs;
 
 import org.jf.dexlib2.ValueType;
 import org.jf.dexlib2.iface.value.EncodedValue;
 import org.jf.dexlib2.iface.value.LongEncodedValue;
 
-import com.google.common.primitives.Ints;
-import com.google.common.primitives.Longs;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public abstract class BaseLongEncodedValue implements LongEncodedValue {
     @Override
     public int hashCode() {
         long value = getValue();
-        int hashCode = (int)value;
-        return hashCode*31 + (int)(value>>>32);
+        int hashCode = (int) value;
+        return hashCode * 31 + (int) (value >>> 32);
     }
 
     @Override
     public boolean equals(@Nullable Object o) {
         if (o instanceof LongEncodedValue) {
-            return getValue() == ((LongEncodedValue)o).getValue();
+            return getValue() == ((LongEncodedValue) o).getValue();
         }
         return false;
     }
@@ -61,8 +61,10 @@ public abstract class BaseLongEncodedValue implements LongEncodedValue {
     public int compareTo(@Nonnull EncodedValue o) {
         int res = Ints.compare(getValueType(), o.getValueType());
         if (res != 0) return res;
-        return Longs.compare(getValue(), ((LongEncodedValue)o).getValue());
+        return Longs.compare(getValue(), ((LongEncodedValue) o).getValue());
     }
 
-    public int getValueType() { return ValueType.LONG; }
+    public int getValueType() {
+        return ValueType.LONG;
+    }
 }

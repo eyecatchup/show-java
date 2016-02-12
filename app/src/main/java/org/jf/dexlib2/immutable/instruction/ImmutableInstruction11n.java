@@ -31,12 +31,12 @@
 
 package org.jf.dexlib2.immutable.instruction;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.Format;
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.iface.instruction.formats.Instruction11n;
 import org.jf.dexlib2.util.Preconditions;
+
+import javax.annotation.Nonnull;
 
 public class ImmutableInstruction11n extends ImmutableInstruction implements Instruction11n {
     public static final Format FORMAT = Format.Format11n;
@@ -51,10 +51,10 @@ public class ImmutableInstruction11n extends ImmutableInstruction implements Ins
         this.registerA = Preconditions.checkNibbleRegister(registerA);
         this.literal = Preconditions.checkNibbleLiteral(literal);
     }
-    
+
     public static ImmutableInstruction11n of(Instruction11n instruction) {
         if (instruction instanceof ImmutableInstruction11n) {
-            return (ImmutableInstruction11n)instruction;
+            return (ImmutableInstruction11n) instruction;
         }
         return new ImmutableInstruction11n(
                 instruction.getOpcode(),
@@ -62,9 +62,23 @@ public class ImmutableInstruction11n extends ImmutableInstruction implements Ins
                 instruction.getNarrowLiteral());
     }
 
-    @Override public int getRegisterA() { return registerA; }
-    @Override public int getNarrowLiteral() { return literal; }
-    @Override public long getWideLiteral() { return literal; }
+    @Override
+    public int getRegisterA() {
+        return registerA;
+    }
 
-    @Override public Format getFormat() { return FORMAT; }
+    @Override
+    public int getNarrowLiteral() {
+        return literal;
+    }
+
+    @Override
+    public long getWideLiteral() {
+        return literal;
+    }
+
+    @Override
+    public Format getFormat() {
+        return FORMAT;
+    }
 }

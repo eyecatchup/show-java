@@ -31,16 +31,18 @@
 
 package org.jf.dexlib2.dexbacked;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.base.BaseAnnotationElement;
 import org.jf.dexlib2.dexbacked.value.DexBackedEncodedValue;
 import org.jf.dexlib2.iface.value.EncodedValue;
 
+import javax.annotation.Nonnull;
+
 public class DexBackedAnnotationElement extends BaseAnnotationElement {
-    @Nonnull private final DexBackedDexFile dexFile;
     public final int nameIndex;
-    @Nonnull public final EncodedValue value;
+    @Nonnull
+    public final EncodedValue value;
+    @Nonnull
+    private final DexBackedDexFile dexFile;
 
     public DexBackedAnnotationElement(@Nonnull DexReader reader) {
         this.dexFile = reader.dexBuf;
@@ -48,6 +50,15 @@ public class DexBackedAnnotationElement extends BaseAnnotationElement {
         this.value = DexBackedEncodedValue.readFrom(reader);
     }
 
-    @Nonnull @Override public String getName() { return dexFile.getString(nameIndex); }
-    @Nonnull @Override public EncodedValue getValue() { return value; }
+    @Nonnull
+    @Override
+    public String getName() {
+        return dexFile.getString(nameIndex);
+    }
+
+    @Nonnull
+    @Override
+    public EncodedValue getValue() {
+        return value;
+    }
 }

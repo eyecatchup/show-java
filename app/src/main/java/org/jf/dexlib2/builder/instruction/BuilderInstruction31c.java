@@ -31,8 +31,6 @@
 
 package org.jf.dexlib2.builder.instruction;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.Format;
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.builder.BuilderInstruction;
@@ -40,11 +38,14 @@ import org.jf.dexlib2.iface.instruction.formats.Instruction31c;
 import org.jf.dexlib2.iface.reference.Reference;
 import org.jf.dexlib2.util.Preconditions;
 
+import javax.annotation.Nonnull;
+
 public class BuilderInstruction31c extends BuilderInstruction implements Instruction31c {
     public static final Format FORMAT = Format.Format31c;
 
     protected final int registerA;
-    @Nonnull protected final Reference reference;
+    @Nonnull
+    protected final Reference reference;
 
     public BuilderInstruction31c(@Nonnull Opcode opcode,
                                  int registerA,
@@ -54,9 +55,24 @@ public class BuilderInstruction31c extends BuilderInstruction implements Instruc
         this.reference = reference;
     }
 
-    @Override public int getRegisterA() { return registerA; }
-    @Nonnull @Override public Reference getReference() { return reference; }
-    @Override public int getReferenceType() { return opcode.referenceType; }
+    @Override
+    public int getRegisterA() {
+        return registerA;
+    }
 
-    @Override public Format getFormat() { return FORMAT; }
+    @Nonnull
+    @Override
+    public Reference getReference() {
+        return reference;
+    }
+
+    @Override
+    public int getReferenceType() {
+        return opcode.referenceType;
+    }
+
+    @Override
+    public Format getFormat() {
+        return FORMAT;
+    }
 }

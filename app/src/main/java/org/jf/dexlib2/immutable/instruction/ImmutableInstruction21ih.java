@@ -31,12 +31,12 @@
 
 package org.jf.dexlib2.immutable.instruction;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.Format;
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.iface.instruction.formats.Instruction21ih;
 import org.jf.dexlib2.util.Preconditions;
+
+import javax.annotation.Nonnull;
 
 public class ImmutableInstruction21ih extends ImmutableInstruction implements Instruction21ih {
     public static final Format FORMAT = Format.Format21ih;
@@ -54,7 +54,7 @@ public class ImmutableInstruction21ih extends ImmutableInstruction implements In
 
     public static ImmutableInstruction21ih of(Instruction21ih instruction) {
         if (instruction instanceof ImmutableInstruction21ih) {
-            return (ImmutableInstruction21ih)instruction;
+            return (ImmutableInstruction21ih) instruction;
         }
         return new ImmutableInstruction21ih(
                 instruction.getOpcode(),
@@ -62,10 +62,28 @@ public class ImmutableInstruction21ih extends ImmutableInstruction implements In
                 instruction.getNarrowLiteral());
     }
 
-    @Override public int getRegisterA() { return registerA; }
-    @Override public int getNarrowLiteral() { return literal; }
-    @Override public long getWideLiteral() { return literal; }
-    @Override public short getHatLiteral() { return (short)(literal >>> 16); }
+    @Override
+    public int getRegisterA() {
+        return registerA;
+    }
 
-    @Override public Format getFormat() { return FORMAT; }
+    @Override
+    public int getNarrowLiteral() {
+        return literal;
+    }
+
+    @Override
+    public long getWideLiteral() {
+        return literal;
+    }
+
+    @Override
+    public short getHatLiteral() {
+        return (short) (literal >>> 16);
+    }
+
+    @Override
+    public Format getFormat() {
+        return FORMAT;
+    }
 }

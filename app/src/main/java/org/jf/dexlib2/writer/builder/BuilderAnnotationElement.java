@@ -31,26 +31,32 @@
 
 package org.jf.dexlib2.writer.builder;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.base.BaseAnnotationElement;
 import org.jf.dexlib2.iface.value.EncodedValue;
 import org.jf.dexlib2.writer.builder.BuilderEncodedValues.BuilderEncodedValue;
 
+import javax.annotation.Nonnull;
+
 public class BuilderAnnotationElement extends BaseAnnotationElement {
-    @Nonnull final BuilderStringReference name;
-    @Nonnull final BuilderEncodedValue value;
+    @Nonnull
+    final BuilderStringReference name;
+    @Nonnull
+    final BuilderEncodedValue value;
 
     public BuilderAnnotationElement(@Nonnull BuilderStringReference name, @Nonnull BuilderEncodedValue value) {
         this.name = name;
         this.value = value;
     }
 
-    @Nonnull @Override public String getName() {
+    @Nonnull
+    @Override
+    public String getName() {
         return name.getString();
     }
 
-    @Nonnull @Override public EncodedValue getValue() {
+    @Nonnull
+    @Override
+    public EncodedValue getValue() {
         return value;
     }
 }

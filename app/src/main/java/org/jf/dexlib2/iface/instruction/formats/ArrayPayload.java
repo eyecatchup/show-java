@@ -31,13 +31,15 @@
 
 package org.jf.dexlib2.iface.instruction.formats;
 
+import org.jf.dexlib2.iface.instruction.PayloadInstruction;
+
 import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import org.jf.dexlib2.iface.instruction.PayloadInstruction;
-
 public interface ArrayPayload extends PayloadInstruction {
-    public int getElementWidth();
-    @Nonnull public List<Number> getArrayElements();
+    int getElementWidth();
+
+    @Nonnull
+    List<Number> getArrayElements();
 }

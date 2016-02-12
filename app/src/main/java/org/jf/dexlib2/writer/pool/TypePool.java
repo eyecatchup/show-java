@@ -31,15 +31,16 @@
 
 package org.jf.dexlib2.writer.pool;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.jf.dexlib2.iface.reference.TypeReference;
 import org.jf.dexlib2.writer.TypeSection;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class TypePool extends StringTypeBasePool
         implements TypeSection<CharSequence, CharSequence, TypeReference> {
-    @Nonnull private final StringPool stringPool;
+    @Nonnull
+    private final StringPool stringPool;
 
     public TypePool(@Nonnull StringPool stringPool) {
         this.stringPool = stringPool;
@@ -59,11 +60,14 @@ public class TypePool extends StringTypeBasePool
         }
     }
 
-    @Override public int getItemIndex(@Nonnull TypeReference key) {
+    @Override
+    public int getItemIndex(@Nonnull TypeReference key) {
         return getItemIndex(key.getType());
     }
 
-    @Nonnull @Override public CharSequence getString(@Nonnull CharSequence type) {
+    @Nonnull
+    @Override
+    public CharSequence getString(@Nonnull CharSequence type) {
         return type;
     }
 }

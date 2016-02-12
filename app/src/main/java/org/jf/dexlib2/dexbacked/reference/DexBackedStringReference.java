@@ -31,13 +31,14 @@
 
 package org.jf.dexlib2.dexbacked.reference;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.base.reference.BaseStringReference;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 
+import javax.annotation.Nonnull;
+
 public class DexBackedStringReference extends BaseStringReference {
-    @Nonnull public final DexBackedDexFile dexFile;
+    @Nonnull
+    public final DexBackedDexFile dexFile;
     public final int stringIndex;
 
     public DexBackedStringReference(@Nonnull DexBackedDexFile dexBuf,

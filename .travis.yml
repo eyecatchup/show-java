@@ -1,9 +1,10 @@
 language: android
 android:
    components:
+   - tools
    - platform-tools
-   - android-22
-   - build-tools-22.0.1
+   - android-23
+   - build-tools-23.0.2
    - extra
    
 env:
@@ -12,13 +13,24 @@ env:
    
 jdk: oraclejdk7
 
+sudo: false
+
 notifications:
   email: false
 
-before_install:
-  - sudo apt-get update -qq
-  - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch > /dev/null; fi
+addons:
+  apt:
+    packages:
+    - libgd2-xpm
+    - ia32-libs
+    - ia32-libs-multiarch
 
 script:
+  - rm settings.gradle
+  - mv travis.gradle settings.gradle
+  - sed -i -e "s/apl'/apl_clone'/g" app/build.gradle
+  - touch app/extra.gradle
+  - printf 'GooglePlayLicenseKey="GooglePlayLicenseKey"\nIapProductKey="IapProductKey"\ncc="cc"\nii="ii"' > app/keys.properties
+  - MALLOC_ARENA_MAX=1
   - chmod a+x gradlew
-  - ./gradlew clean build --stacktrace
+  - ./gradlew clean assembleTravisDebug --stacktrace

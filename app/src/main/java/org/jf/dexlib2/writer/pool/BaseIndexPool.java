@@ -31,24 +31,28 @@
 
 package org.jf.dexlib2.writer.pool;
 
+import com.google.common.collect.Maps;
+
+import org.jf.dexlib2.writer.IndexSection;
+import org.jf.util.ExceptionWithContext;
+
 import java.util.Collection;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
 
-import org.jf.dexlib2.writer.IndexSection;
-import org.jf.util.ExceptionWithContext;
-
-import com.google.common.collect.Maps;
-
 public abstract class BaseIndexPool<Key> implements IndexSection<Key> {
-    @Nonnull protected final Map<Key, Integer> internedItems = Maps.newHashMap();
+    @Nonnull
+    protected final Map<Key, Integer> internedItems = Maps.newHashMap();
 
-    @Nonnull @Override public Collection<? extends Map.Entry<? extends Key, Integer>> getItems() {
+    @Nonnull
+    @Override
+    public Collection<? extends Map.Entry<? extends Key, Integer>> getItems() {
         return internedItems.entrySet();
     }
 
-    @Override public int getItemIndex(@Nonnull Key key) {
+    @Override
+    public int getItemIndex(@Nonnull Key key) {
         Integer index = internedItems.get(key);
         if (index == null) {
             throw new ExceptionWithContext("Item not found.: %s", getItemString(key));
@@ -56,7 +60,8 @@ public abstract class BaseIndexPool<Key> implements IndexSection<Key> {
         return index;
     }
 
-    @Nonnull protected String getItemString(@Nonnull Key key) {
+    @Nonnull
+    protected String getItemString(@Nonnull Key key) {
         return key.toString();
     }
 }

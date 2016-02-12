@@ -31,10 +31,10 @@
 
 package org.jf.dexlib2.builder;
 
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.Opcode;
 import org.jf.dexlib2.iface.instruction.OffsetInstruction;
+
+import javax.annotation.Nonnull;
 
 public abstract class BuilderOffsetInstruction extends BuilderInstruction implements OffsetInstruction {
     @Nonnull
@@ -46,10 +46,11 @@ public abstract class BuilderOffsetInstruction extends BuilderInstruction implem
         this.target = target;
     }
 
-    @Override public int getCodeOffset() {
+    @Override
+    public int getCodeOffset() {
         int codeOffset = internalGetCodeOffset();
         if ((this.getCodeUnits() == 1 && (codeOffset < Byte.MIN_VALUE || codeOffset > Byte.MAX_VALUE)) ||
-            (this.getCodeUnits() == 2 && (codeOffset < Short.MIN_VALUE || codeOffset > Short.MAX_VALUE))) {
+                (this.getCodeUnits() == 2 && (codeOffset < Short.MIN_VALUE || codeOffset > Short.MAX_VALUE))) {
             throw new IllegalStateException("Target is out of range");
         }
         return codeOffset;

@@ -31,14 +31,14 @@
 
 package org.jf.dexlib2.builder;
 
+import org.jf.dexlib2.Opcode;
+import org.jf.dexlib2.builder.instruction.BuilderSwitchElement;
+import org.jf.dexlib2.iface.instruction.SwitchPayload;
+
 import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import org.jf.dexlib2.Opcode;
-import org.jf.dexlib2.builder.instruction.BuilderSwitchElement;
-import org.jf.dexlib2.iface.instruction.SwitchPayload;
 
 public abstract class BuilderSwitchPayload extends BuilderInstruction implements SwitchPayload {
     @Nullable
@@ -56,5 +56,7 @@ public abstract class BuilderSwitchPayload extends BuilderInstruction implements
         return referrer;
     }
 
-    @Nonnull @Override public abstract List<? extends BuilderSwitchElement> getSwitchElements();
+    @Nonnull
+    @Override
+    public abstract List<? extends BuilderSwitchElement> getSwitchElements();
 }

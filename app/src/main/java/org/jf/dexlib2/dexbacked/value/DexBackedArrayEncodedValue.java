@@ -31,10 +31,6 @@
 
 package org.jf.dexlib2.dexbacked.value;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import org.jf.dexlib2.base.value.BaseArrayEncodedValue;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.dexbacked.DexReader;
@@ -42,8 +38,13 @@ import org.jf.dexlib2.dexbacked.util.VariableSizeList;
 import org.jf.dexlib2.iface.value.ArrayEncodedValue;
 import org.jf.dexlib2.iface.value.EncodedValue;
 
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
 public class DexBackedArrayEncodedValue extends BaseArrayEncodedValue implements ArrayEncodedValue {
-    @Nonnull public final DexBackedDexFile dexFile;
+    @Nonnull
+    public final DexBackedDexFile dexFile;
     private final int elementCount;
     private final int encodedArrayOffset;
 
@@ -60,7 +61,7 @@ public class DexBackedArrayEncodedValue extends BaseArrayEncodedValue implements
     }
 
     private static void skipElementsFrom(@Nonnull DexReader reader, int elementCount) {
-        for (int i=0; i<elementCount; i++) {
+        for (int i = 0; i < elementCount; i++) {
             DexBackedEncodedValue.skipFrom(reader);
         }
     }

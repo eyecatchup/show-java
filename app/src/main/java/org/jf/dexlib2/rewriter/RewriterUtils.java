@@ -31,6 +31,9 @@
 
 package org.jf.dexlib2.rewriter;
 
+import org.jf.dexlib2.base.reference.BaseTypeReference;
+import org.jf.dexlib2.iface.reference.TypeReference;
+
 import java.util.AbstractList;
 import java.util.AbstractSet;
 import java.util.Iterator;
@@ -40,49 +43,54 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.jf.dexlib2.base.reference.BaseTypeReference;
-import org.jf.dexlib2.iface.reference.TypeReference;
-
 public class RewriterUtils {
     @Nullable
     public static <T> T rewriteNullable(@Nonnull Rewriter<T> rewriter, @Nullable T value) {
-        return value==null?null:rewriter.rewrite(value);
+        return value == null ? null : rewriter.rewrite(value);
     }
 
     public static <T> Set<T> rewriteSet(@Nonnull final Rewriter<T> rewriter,
                                         @Nonnull final Set<? extends T> set) {
         return new AbstractSet<T>() {
-            @Nonnull @Override public Iterator<T> iterator() {
+            @Nonnull
+            @Override
+            public Iterator<T> iterator() {
                 final Iterator<? extends T> iterator = set.iterator();
                 return new Iterator<T>() {
-                    @Override public boolean hasNext() {
+                    @Override
+                    public boolean hasNext() {
                         return iterator.hasNext();
                     }
 
-                    @Override public T next() {
+                    @Override
+                    public T next() {
                         return rewriteNullable(rewriter, iterator.next());
                     }
 
-                    @Override public void remove() {
+                    @Override
+                    public void remove() {
                         iterator.remove();
                     }
                 };
             }
 
-            @Override public int size() {
+            @Override
+            public int size() {
                 return set.size();
             }
         };
     }
 
     public static <T> List<T> rewriteList(@Nonnull final Rewriter<T> rewriter,
-                                        @Nonnull final List<? extends T> list) {
+                                          @Nonnull final List<? extends T> list) {
         return new AbstractList<T>() {
-            @Override public T get(int i) {
+            @Override
+            public T get(int i) {
                 return rewriteNullable(rewriter, list.get(i));
             }
 
-            @Override public int size() {
+            @Override
+            public int size() {
                 return list.size();
             }
         };
@@ -91,18 +99,22 @@ public class RewriterUtils {
     public static <T> Iterable<T> rewriteIterable(@Nonnull final Rewriter<T> rewriter,
                                                   @Nonnull final Iterable<? extends T> iterable) {
         return new Iterable<T>() {
-            @Override public Iterator<T> iterator() {
+            @Override
+            public Iterator<T> iterator() {
                 final Iterator<? extends T> iterator = iterable.iterator();
                 return new Iterator<T>() {
-                    @Override public boolean hasNext() {
+                    @Override
+                    public boolean hasNext() {
                         return iterator.hasNext();
                     }
 
-                    @Override public T next() {
+                    @Override
+                    public T next() {
                         return rewriteNullable(rewriter, iterator.next());
                     }
 
-                    @Override public void remove() {
+                    @Override
+                    public void remove() {
                         iterator.remove();
                     }
                 };
@@ -113,7 +125,9 @@ public class RewriterUtils {
     public static TypeReference rewriteTypeReference(@Nonnull final Rewriter<String> typeRewriter,
                                                      @Nonnull final TypeReference typeReference) {
         return new BaseTypeReference() {
-            @Nonnull @Override public String getType() {
+            @Nonnull
+            @Override
+            public String getType() {
                 return typeRewriter.rewrite(typeReference.getType());
             }
         };

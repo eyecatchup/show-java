@@ -31,19 +31,32 @@
 
 package org.jf.dexlib2.analysis;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.jf.dexlib2.iface.reference.FieldReference;
 import org.jf.dexlib2.iface.reference.MethodReference;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public interface TypeProto {
-    @Nonnull ClassPath getClassPath();
-    @Nonnull String getType();
+    @Nonnull
+    ClassPath getClassPath();
+
+    @Nonnull
+    String getType();
+
     boolean isInterface();
+
     boolean implementsInterface(@Nonnull String iface);
-    @Nullable String getSuperclass();
-    @Nonnull TypeProto getCommonSuperclass(@Nonnull TypeProto other);
-    @Nullable FieldReference getFieldByOffset(int fieldOffset);
-    @Nullable MethodReference getMethodByVtableIndex(int vtableIndex);
+
+    @Nullable
+    String getSuperclass();
+
+    @Nonnull
+    TypeProto getCommonSuperclass(@Nonnull TypeProto other);
+
+    @Nullable
+    FieldReference getFieldByOffset(int fieldOffset);
+
+    @Nullable
+    MethodReference getMethodByVtableIndex(int vtableIndex);
 }

@@ -31,6 +31,11 @@
 
 package org.jf.dexlib2.writer.builder;
 
+import com.google.common.collect.Maps;
+
+import org.jf.dexlib2.writer.DexWriter;
+import org.jf.dexlib2.writer.StringSection;
+
 import java.util.Collection;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentMap;
@@ -38,50 +43,55 @@ import java.util.concurrent.ConcurrentMap;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.jf.dexlib2.writer.DexWriter;
-import org.jf.dexlib2.writer.StringSection;
-
-import com.google.common.collect.Maps;
-
 class BuilderStringPool implements StringSection<BuilderStringReference, BuilderStringReference> {
-    @Nonnull private final ConcurrentMap<String, BuilderStringReference> internedItems = Maps.newConcurrentMap();
+    @Nonnull
+    private final ConcurrentMap<String, BuilderStringReference> internedItems = Maps.newConcurrentMap();
 
-    @Nonnull BuilderStringReference internString(@Nonnull String string) {
+    @Nonnull
+    BuilderStringReference internString(@Nonnull String string) {
         BuilderStringReference ret = internedItems.get(string);
         if (ret != null) {
             return ret;
         }
         BuilderStringReference stringReference = new BuilderStringReference(string);
         ret = internedItems.putIfAbsent(string, stringReference);
-        return ret==null?stringReference:ret;
+        return ret == null ? stringReference : ret;
     }
 
-    @Nullable BuilderStringReference internNullableString(@Nullable String string) {
+    @Nullable
+    BuilderStringReference internNullableString(@Nullable String string) {
         if (string == null) {
             return null;
         }
         return internString(string);
     }
 
-    @Override public int getNullableItemIndex(@Nullable BuilderStringReference key) {
-        return key==null?DexWriter.NO_INDEX:key.index;
+    @Override
+    public int getNullableItemIndex(@Nullable BuilderStringReference key) {
+        return key == null ? DexWriter.NO_INDEX : key.index;
     }
 
-    @Override public int getItemIndex(@Nonnull BuilderStringReference key) {
+    @Override
+    public int getItemIndex(@Nonnull BuilderStringReference key) {
         return key.index;
     }
 
-    @Override public boolean hasJumboIndexes() {
+    @Override
+    public boolean hasJumboIndexes() {
         return internedItems.size() > 65536;
     }
 
-    @Nonnull @Override public Collection<? extends Entry<? extends BuilderStringReference, Integer>> getItems() {
+    @Nonnull
+    @Override
+    public Collection<? extends Entry<? extends BuilderStringReference, Integer>> getItems() {
         return new BuilderMapEntryCollection<BuilderStringReference>(internedItems.values()) {
-            @Override protected int getValue(@Nonnull BuilderStringReference key) {
+            @Override
+            protected int getValue(@Nonnull BuilderStringReference key) {
                 return key.index;
             }
 
-            @Override protected int setValue(@Nonnull BuilderStringReference key, int value) {
+            @Override
+            protected int setValue(@Nonnull BuilderStringReference key, int value) {
                 int prev = key.index;
                 key.index = value;
                 return prev;

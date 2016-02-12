@@ -31,12 +31,13 @@
 
 package org.jf.dexlib2.writer.builder;
 
-import javax.annotation.Nullable;
-
 import org.jf.dexlib2.base.BaseExceptionHandler;
 
+import javax.annotation.Nullable;
+
 public class BuilderExceptionHandler extends BaseExceptionHandler {
-    @Nullable final BuilderTypeReference exceptionType;
+    @Nullable
+    final BuilderTypeReference exceptionType;
     final int handlerCodeAddress;
 
     BuilderExceptionHandler(@Nullable BuilderTypeReference exceptionType, int handlerCodeAddress) {
@@ -44,11 +45,14 @@ public class BuilderExceptionHandler extends BaseExceptionHandler {
         this.handlerCodeAddress = handlerCodeAddress;
     }
 
-    @Nullable @Override public String getExceptionType() {
-        return exceptionType==null?null:exceptionType.getType();
+    @Nullable
+    @Override
+    public String getExceptionType() {
+        return exceptionType == null ? null : exceptionType.getType();
     }
 
-    @Override public int getHandlerCodeAddress() {
+    @Override
+    public int getHandlerCodeAddress() {
         return handlerCodeAddress;
     }
 }

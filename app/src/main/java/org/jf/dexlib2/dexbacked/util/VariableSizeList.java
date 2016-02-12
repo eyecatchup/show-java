@@ -31,15 +31,16 @@
 
 package org.jf.dexlib2.dexbacked.util;
 
+import org.jf.dexlib2.dexbacked.DexBackedDexFile;
+import org.jf.dexlib2.dexbacked.DexReader;
+
 import java.util.AbstractSequentialList;
 
 import javax.annotation.Nonnull;
 
-import org.jf.dexlib2.dexbacked.DexBackedDexFile;
-import org.jf.dexlib2.dexbacked.DexReader;
-
 public abstract class VariableSizeList<T> extends AbstractSequentialList<T> {
-    @Nonnull private final DexBackedDexFile dexFile;
+    @Nonnull
+    private final DexBackedDexFile dexFile;
     private final int offset;
     private final int size;
 
@@ -57,7 +58,10 @@ public abstract class VariableSizeList<T> extends AbstractSequentialList<T> {
         return listIterator(0);
     }
 
-    @Override public int size() { return size; }
+    @Override
+    public int size() {
+        return size;
+    }
 
     @Nonnull
     @Override
@@ -68,7 +72,7 @@ public abstract class VariableSizeList<T> extends AbstractSequentialList<T> {
                 return VariableSizeList.this.readNextItem(reader, index);
             }
         };
-        for (int i=0; i<index; i++) {
+        for (int i = 0; i < index; i++) {
             iterator.next();
         }
         return iterator;

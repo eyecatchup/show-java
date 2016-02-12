@@ -31,43 +31,16 @@
 
 package org.jf.dexlib2.immutable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import com.google.common.collect.ImmutableList;
 
 import org.jf.dexlib2.base.BaseExceptionHandler;
 import org.jf.dexlib2.iface.ExceptionHandler;
 import org.jf.util.ImmutableConverter;
 
-import com.google.common.collect.ImmutableList;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ImmutableExceptionHandler extends BaseExceptionHandler implements ExceptionHandler {
-    @Nullable protected final String exceptionType;
-    protected final int handlerCodeAddress;
-
-    public ImmutableExceptionHandler(@Nullable String exceptionType,
-                                     int handlerCodeAddress) {
-        this.exceptionType = exceptionType;
-        this.handlerCodeAddress = handlerCodeAddress;
-    }
-
-    public static ImmutableExceptionHandler of(ExceptionHandler exceptionHandler) {
-        if (exceptionHandler instanceof ImmutableExceptionHandler) {
-            return (ImmutableExceptionHandler)exceptionHandler;
-        }
-        return new ImmutableExceptionHandler(
-                exceptionHandler.getExceptionType(),
-                exceptionHandler.getHandlerCodeAddress());
-    }
-
-    @Nullable @Override public String getExceptionType() { return exceptionType; }
-    @Override public int getHandlerCodeAddress() { return handlerCodeAddress; }
-
-    @Nonnull
-    public static ImmutableList<ImmutableExceptionHandler> immutableListOf(
-            @Nullable Iterable<? extends ExceptionHandler> list) {
-        return CONVERTER.toList(list);
-    }
-
     private static final ImmutableConverter<ImmutableExceptionHandler, ExceptionHandler> CONVERTER =
             new ImmutableConverter<ImmutableExceptionHandler, ExceptionHandler>() {
                 @Override
@@ -81,4 +54,39 @@ public class ImmutableExceptionHandler extends BaseExceptionHandler implements E
                     return ImmutableExceptionHandler.of(item);
                 }
             };
+    @Nullable
+    protected final String exceptionType;
+    protected final int handlerCodeAddress;
+
+    public ImmutableExceptionHandler(@Nullable String exceptionType,
+                                     int handlerCodeAddress) {
+        this.exceptionType = exceptionType;
+        this.handlerCodeAddress = handlerCodeAddress;
+    }
+
+    public static ImmutableExceptionHandler of(ExceptionHandler exceptionHandler) {
+        if (exceptionHandler instanceof ImmutableExceptionHandler) {
+            return (ImmutableExceptionHandler) exceptionHandler;
+        }
+        return new ImmutableExceptionHandler(
+                exceptionHandler.getExceptionType(),
+                exceptionHandler.getHandlerCodeAddress());
+    }
+
+    @Nonnull
+    public static ImmutableList<ImmutableExceptionHandler> immutableListOf(
+            @Nullable Iterable<? extends ExceptionHandler> list) {
+        return CONVERTER.toList(list);
+    }
+
+    @Nullable
+    @Override
+    public String getExceptionType() {
+        return exceptionType;
+    }
+
+    @Override
+    public int getHandlerCodeAddress() {
+        return handlerCodeAddress;
+    }
 }
